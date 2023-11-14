@@ -1,4 +1,6 @@
 "use client";
+import Heading from "@/components/heading/Heading";
+import Loader from "@/components/loader/Loader";
 import { useRouter } from "next/navigation";
 import React from "react";
 import styles from "./AddProduct.module.scss";
@@ -28,8 +30,8 @@ const initialState = {
 
 const AddProductClient = () => {
   const [product, setProduct] = React.useState({ ...initialState });
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
+  const [uploadProgress, setUploadProgress] = React.useState(0);
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const router = useRouter();
 
@@ -44,7 +46,108 @@ const AddProductClient = () => {
     e.preventDefault();
   };
 
-  return <div>AddProductClient</div>;
+  return (
+    <>
+      {isLoading && <Loader />}
+
+      <div className={styles.product}>
+        <Heading title="새 상품 생성하기" />
+        <form onSubmit={addProduct}>
+          <label>상품이름</label>
+          <input
+            type="text"
+            placeholder="상품 이름"
+            required
+            name="name"
+            value={product.name}
+            onChange={(e) => handleInputChange(e)}
+          ></input>
+
+          <div>
+            {uploadProgress === 0 ? null : (
+              <div>
+                <div
+                  className={styles["progress-bar"]}
+                  styles={{ width: `${uploadProgress}%` }}
+                >
+                  {uploadProgress < 100
+                    ? `Uploading...${uploadProgress}`
+                    : `Upload Complete ${uploadProgress}`}
+                </div>
+              </div>
+            )}
+
+            <input
+              type="file"
+              placeholder="상품 이미지"
+              accept="image/*"
+              name="image"
+              required
+              onChange={(e) => handleImageChange(e)}
+            />
+
+            {product.imageURL === "" ? null : (
+              <input
+                type="text"
+                name="imageURL"
+                disabled
+                value={product.imageURL}
+                required
+                placeholder="이미지 URL"
+              />
+            )}
+          </div>
+          <label>상품 가격</label>
+          <input
+            type="number"
+            placeholder="상품 가격"
+            required
+            name="price"
+            vlaue={product.price}
+            onChange={(e) => handleInputChange(e)}
+          />
+          <label>상품 카테고리</label>
+          <select
+            required
+            name="category"
+            value={product.category}
+            onChange={(e) => handleInputChange(e)}
+          >
+            <option value="" disabled>
+              상품 카테고리 선택
+            </option>
+            {categories.map((category) => {
+              return (
+                <option key={category.id} value={category.name}>
+                  {category.name}
+                </option>
+              );
+            })}
+          </select>
+
+          <label>상품 브랜드 / 회사</label>
+          <input
+            type="text"
+            placeholder="상품 브랜드/회사"
+            name="brand"
+            value={product.brand}
+            onChange={(e) => handleInputChange(e)}
+          />
+
+          <label>상품 설명:</label>
+          <textarea
+            name="desc"
+            value={product.desc}
+            cols={10}
+            rows={10}
+            required
+            onChange={(e) => handleInputChange}
+          />
+          <Button type="submit">상품 생성</Button>
+        </form>
+      </div>
+    </>
+  );
 };
 
 export default AddProductClient;
