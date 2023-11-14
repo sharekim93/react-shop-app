@@ -1,8 +1,17 @@
 "use client";
+import React from "react";
+
+import { useRouter } from "next/navigation";
+
+import { db, storage } from "@/firebase/firebase";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import { toast } from "react-toastify";
+
 import Heading from "@/components/heading/Heading";
 import Loader from "@/components/loader/Loader";
-import { useRouter } from "next/navigation";
-import React from "react";
+import Button from "@/components/button/Button";
+
 import styles from "./AddProduct.module.scss";
 
 export const categories = [
@@ -40,10 +49,55 @@ const AddProductClient = () => {
     setProduct({ ...product, [name]: value });
   };
 
-  const handleImageChange = (e) => {};
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    const storageRef = ref(storage, `images/${Date.now()}${file.name}`);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      "state_changed",
+      (snapshot) => {
+        const progress =
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        setUploadProgress(progress);
+      },
+      (err) => {
+        toast.error(err.message);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+          setProduct({ ...product, imageURL: downloadURL });
+          toast.success("이미지를 성공적으로 업로드 했습니다.");
+        });
+      }
+    );
+  };
 
   const addProduct = (e) => {
     e.preventDefault();
+    setIsLoading(true);
+    try {
+      addDoc(collection(db, "products"), {
+        name: product.name,
+        imageURL: product.imageURL,
+        price: Number(product.price),
+        category: product.category,
+        brand: product.brand,
+        desc: product.desc,
+        createdAt: Timestamp.now().toDate(),
+      });
+
+      setIsLoading(false);
+      setUploadProgress(0);
+      setProduct({ ...initialState });
+
+      toast.success("상품을 저장했습니다");
+      router.push("/admin/all-products");
+    } catch (error) {
+      setIsLoading(false);
+      toast.error(error.message);
+    }
   };
 
   return (
@@ -61,14 +115,14 @@ const AddProductClient = () => {
             name="name"
             value={product.name}
             onChange={(e) => handleInputChange(e)}
-          ></input>
+          />
 
           <div>
             {uploadProgress === 0 ? null : (
               <div>
                 <div
                   className={styles["progress-bar"]}
-                  styles={{ width: `${uploadProgress}%` }}
+                  style={{ width: `${uploadProgress}%` }}
                 >
                   {uploadProgress < 100
                     ? `Uploading...${uploadProgress}`
@@ -141,7 +195,7 @@ const AddProductClient = () => {
             cols={10}
             rows={10}
             required
-            onChange={(e) => handleInputChange}
+            onChange={(e) => handleInputChange(e)}
           />
           <Button type="submit">상품 생성</Button>
         </form>
