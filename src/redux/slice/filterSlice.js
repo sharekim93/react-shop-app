@@ -88,6 +88,6 @@ export const {
   SORT_PRODUCTS,
 } = filterSlice.actions;
 
-export const selectFilteredProducts = () => state.filter.filteredProducts;
+export const selectFilteredProducts = (state) => state.filter.filteredProducts;
 
 export default filterSlice.reducer;
