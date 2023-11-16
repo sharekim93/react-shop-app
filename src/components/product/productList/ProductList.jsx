@@ -1,9 +1,9 @@
+import React, { useState, useEffect } from "react";
 import Pagination from "@/components/pagination/Pagination";
 import {
   selectFilteredProducts,
   SORT_PRODUCTS,
 } from "@/redux/slice/filterSlice";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductItem from "../productItem/ProductItem";
 import styles from "./ProductList.module.scss";
@@ -76,7 +76,7 @@ const ProductList = () => {
         </div>
         <div className={styles.limit}>
           <select
-            value={productsPerPage}
+            value={productPerPage}
             onChange={(e) => setProductPerPage(Number(e.target.value))}
           >
             <option value={10}>10개씩 보기</option>
