@@ -1,13 +1,9 @@
 "use client";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import useFetchCollection from "@/hooks/useFetchCollection";
-import {
-  GET_PRICE_RANGE,
-  selectProducts,
-  STORE_PRODUCTS,
-} from "@/redux/slice/productSlice";
+import { GET_PRICE_RANGE, STORE_PRODUCTS } from "@/redux/slice/productSlice";
 import Loader from "../loader/Loader";
 import ProductFilter from "./productFilter/ProductFilter";
 import ProductList from "./productList/ProductList";
@@ -32,8 +28,6 @@ const Product = () => {
       })
     );
   }, [data, dispatch]);
-
-  const products = useSelector(selectProducts);
 
   return (
     <section className={styles.product}>
