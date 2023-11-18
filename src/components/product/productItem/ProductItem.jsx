@@ -3,21 +3,22 @@ import React from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-import styles from "./ProductItem.module.scss";
 import priceFormat from "@/utils/priceFormat";
 import { Rating } from "react-simple-star-rating";
 import useFetchDocuments from "@/hooks/useFetchDocuments";
 
+import styles from "./ProductItem.module.scss";
+
 const ProductItem = ({ id, name, price, imageURL }) => {
-  const { documents } = useFetchDocuments("reviews", ["productID", "==", id]);
+  // const { documents } = useFetchDocuments("reviews", ["productID", "==", id]);
 
   let productRating = 0;
 
-  documents.map((doc) => {
-    productRating = productRating + doc.rate;
-  });
+  // documents.map((doc) => {
+  //   productRating = productRating + doc.rate;
+  // });
 
-  const rating = productRating / documents.length;
+  // const rating = productRating / documents.length;
 
   const shortenText = (text, n) => {
     if (text.length > n) {
@@ -42,12 +43,12 @@ const ProductItem = ({ id, name, price, imageURL }) => {
             </strong>
           </em>
           <div>
-            <Rating
+            {/* <Rating
               size={17}
               readonly
               initialValue={Number.isNaN(rating) ? 0 : rating}
-            />
-            <span className={styles.ratingCount}>(documents.length)</span>
+            /> */}
+            {/* <span className={styles.ratingCount}>(documents.length)</span> */}
           </div>
         </div>
       </div>
