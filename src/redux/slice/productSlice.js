@@ -11,7 +11,7 @@ const productSlice = createSlice({
   initialState,
   reducers: {
     STORE_PRODUCTS(state, action) {
-      state.produts = action.payload.products;
+      state.products = action.payload.products;
     },
     GET_PRICE_RANGE(state, action) {
       const { products } = action.payload;
