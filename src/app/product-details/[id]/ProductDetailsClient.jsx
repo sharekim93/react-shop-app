@@ -14,6 +14,8 @@ import Button from "@/components/button/Button";
 import listCashIcon from "@/assets/list-cash-icon.png";
 import useFetchDocuments from "@/hooks/useFetchDocuments";
 import ProductReviewItem from "@/components/product/productReviewItem/ProductReviewItem";
+import { useDispatch } from "react-redux";
+import { ADD_TO_CART, CALCULATE_TOTAL_QUANTITY } from "@/redux/slice/cartSlice";
 
 const ProductDetailsClient = () => {
   const { id } = useParams();
@@ -28,7 +30,12 @@ const ProductDetailsClient = () => {
 
   const [count, setCount] = useState(1);
 
-  const addToCart = () => {};
+  const dispatch = useDispatch();
+
+  const addToCart = () => {
+    dispatch(ADD_TO_CART({ ...product, quantity: count }));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
 
   const today = new Date();
   const tomorrow = new Date(today.setDate(today.getDate + 1));
@@ -55,7 +62,7 @@ const ProductDetailsClient = () => {
             <div className={styles.content}>
               <div className={styles.header}>
                 <p className={styles.brandName}>{product.brand}</p>
-                <p classNAme={styles.productName}>{product.name}</p>
+                <p className={styles.productName}>{product.name}</p>
                 <div className={styles.rating}>
                   <Rating initialValue={3} size={17} />
                   <span className={styles.count}>10,000개 상품평</span>
@@ -111,7 +118,7 @@ const ProductDetailsClient = () => {
                     +
                   </Button>
 
-                  <Button onClick={() => addToCart}>장바구니 담기</Button>
+                  <Button onClick={() => addToCart()}>장바구니 담기</Button>
                 </div>
               </div>
             </div>
