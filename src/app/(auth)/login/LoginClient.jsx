@@ -34,7 +34,6 @@ const LoginClient = () => {
 
   const loginUser = (e) => {
     e.preventDefault();
-    toast.info("성공");
     setIsLoading(true);
 
     signInWithEmailAndPassword(auth, email, password)
@@ -43,7 +42,10 @@ const LoginClient = () => {
         toast.success("로그인에 성공했습니다");
         redirectUser();
       })
-      .catch((err) => toast.error(err.message));
+      .catch((err) => {
+        setIsLoading(false);
+        toast.error(err.message);
+      });
   };
 
   const signInWithGoogle = () => {
