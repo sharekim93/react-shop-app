@@ -75,7 +75,7 @@ const CheckoutClient = () => {
           createdAt: Timestamp.now().toDate(),
         };
 
-        await addDoc(collection(db, "orders", orderData));
+        await addDoc(collection(db, "orders"), orderData);
         dispatch(CLEAR_CART());
 
         router.push(`/checkout-success?orderId=${orderId}`);
