@@ -70,7 +70,7 @@ const ReviewProductClient = () => {
         </div>
       )}
       <div className={styles.card}>
-        <form onSumbit={(e) => submitReview(e)}>
+        <form onSubmit={(e) => submitReview(e)}>
           <label>평점 : </label>
           <Rating
             initialValue={rate}
