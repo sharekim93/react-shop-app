@@ -43,7 +43,7 @@ const ReviewProductClient = () => {
 
     try {
       addDoc(collection(db, "reviews"), reviewData);
-      router.push(`product-details/${id}`);
+      router.push(`/product-details/${id}`);
     } catch (error) {
       toast.error(error);
     }

@@ -13,7 +13,7 @@ const ProductReviewItem = ({ rate, review, reviewDate, userName }) => {
       </p>
       <Rating initialValue={rate} readonly size={25} />
       <p className={styles.content}>{review}</p>
-      <p className={styels.date}>
+      <p className={styles.date}>
         {/* {Intl.DateTimeFormat().format(new Date(reviewDate))} */}
         {formatTime(reviewDate)}
       </p>
