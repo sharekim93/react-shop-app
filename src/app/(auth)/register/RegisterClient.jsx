@@ -65,7 +65,7 @@ const RegisterClient = () => {
               label="이메일"
               placeholder="아이디(이메일)"
               className={styles.control}
-              vlaue={email}
+              value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
