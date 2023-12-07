@@ -157,7 +157,7 @@ const AddProductClient = () => {
             placeholder="상품 가격"
             required
             name="price"
-            vlaue={product.price}
+            value={product.price}
             onChange={(e) => handleInputChange(e)}
           />
           <label>상품 카테고리</label>
