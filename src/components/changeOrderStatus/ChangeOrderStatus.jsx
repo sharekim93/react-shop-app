@@ -52,8 +52,8 @@ const ChangeOrderStatus = ({ order, id }) => {
               </option>
               <option value="주문수락">주문수락</option>
               <option value="주문처리중">주문처리중</option>
-              <option value="주문중">주문중</option>
-              <option value="주문완료">주문완료</option>
+              <option value="배송중">배송중</option>
+              <option value="배송완료">배송완료</option>
             </select>
             <div>
               <Button type="submit">업데이트</Button>
