@@ -15,12 +15,15 @@ import styles from "./InnerHeader.module.scss";
 import { useDispatch, useSelector } from "react-redux";
 import { FILTER_BY_SEARCH } from "@/redux/slice/filterSlice";
 import { selectProducts } from "@/redux/slice/productSlice";
+import { selectCartTotalQuantity } from "@/redux/slice/cartSlice";
 
 const InnerHeader = () => {
   const router = useRouter();
   const dispatch = useDispatch();
 
   const [search, setSearch] = React.useState("");
+
+  const cartTotalQuantity = useSelector(selectCartTotalQuantity);
 
   const handleClick = () => {
     router.push("/cart");
@@ -108,7 +111,7 @@ const InnerHeader = () => {
             장바구니
           </button>
           <strong className={styles.cartProductCount}>
-            {/* {cartTotalQuantity} */}
+            {cartTotalQuantity}
           </strong>
         </div>
       </div>
