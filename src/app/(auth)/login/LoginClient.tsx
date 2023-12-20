@@ -32,7 +32,7 @@ const LoginClient = () => {
     router.push("/");
   };
 
-  const loginUser = (e) => {
+  const loginUser = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsLoading(true);
 
