@@ -10,7 +10,7 @@ import styles from "./ProductList.module.scss";
 import { IProduct } from "@/types";
 
 interface IProductListProps {
-  products: IProduct[];
+  products?: IProduct[];
 }
 
 const ProductList = ({ products }: IProductListProps) => {
