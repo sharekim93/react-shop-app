@@ -18,7 +18,7 @@ const AutoSignInCheckbox = ({
   checked,
   disabled,
   orientation = "top",
-  messsage = "개인정보 보호를 위해 본인 기기에서만 이용해주세요",
+  message = "개인정보 보호를 위해 본인 기기에서만 이용해주세요",
   onChange,
   ...restProps
 }: IAutoSignInCheckboxProps) => {
@@ -36,7 +36,7 @@ const AutoSignInCheckbox = ({
           left={-5}
           top={24}
           orientation={orientation}
-          messsage={messsage}
+          message={message}
         />
       )}
     </div>
