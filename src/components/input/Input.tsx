@@ -1,9 +1,27 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import classNames from "classnames";
 
 import Icon from "../icon/Icon";
 
 import styles from "./Input.module.scss";
+
+interface IInputProps {
+  id: string;
+  label: string;
+  name?: string;
+  labelVisible?: boolean;
+  icon?: "letter" | "lock" | "show" | "hide";
+  email?: boolean;
+  password?: boolean;
+  placeholder?: string;
+  readonly?: boolean;
+  disabled?: boolean;
+  value?: string;
+  error?: { message: string };
+  className?: string;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  [x: string]: any;
+}
 
 const Input = ({
   id,
@@ -21,7 +39,7 @@ const Input = ({
   className = "",
   onChange,
   ...restProps
-}) => {
+}: IInputProps) => {
   const [inputValue, setInputValue] = React.useState(value ? value : "");
   const [isPasswordVisible, setisPasswordVisible] = React.useState(false);
   const checkType = () => {
