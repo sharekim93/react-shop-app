@@ -51,7 +51,7 @@ const CartClient = () => {
     dispatch(CLEAR_CART());
   };
 
-  const url = typeof window !== undefined ? window.location.href : "";
+  const url = typeof window !== "undefined" ? window.location.href : "";
 
   const checkout = () => {
     if (isLoggedIn) {
