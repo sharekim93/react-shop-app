@@ -55,7 +55,7 @@ const EditProductClient = () => {
         setUploadProgress(progress);
       },
       (err) => {
-        toast.error(getErrorMessage(error));
+        toast.error(getErrorMessage(err));
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
