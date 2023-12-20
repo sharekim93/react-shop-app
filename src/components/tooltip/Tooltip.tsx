@@ -53,7 +53,7 @@ const Tooltip = ({
     <span
       role="tooltip"
       style={style}
-      className={classNames(styles.tooltip, setOrientationClass)}
+      className={classNames(styles.tooltip, setOrientationClass(orientation))}
       {...restProps}
     >
       {message}
