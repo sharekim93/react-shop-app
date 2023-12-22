@@ -1,6 +1,10 @@
 # React-shop-app
 
-## 유명 커머스 클론 프로젝트 (2023.11 ~ 2023.12 예정)
+## 유명 커머스 클론 프로젝트 (2023.11 ~ 2023.12)
+
+### 링크
+
+https://react-shop-app-sharekim.vercel.app/
 
 ### 목적
 
@@ -19,3 +23,12 @@
 - 주문내역/주문 상세 기능을 구현한다
 - 리뷰 기능을 구현한다.
 - 관리자 페이지를 구현한다
+
+### 사용기술
+
+- Typescript
+- React 18, Next.js 13
+- Redux
+- ESLint, Prettier
+- Vercel
+- chart.js, tosspayment-sdk
